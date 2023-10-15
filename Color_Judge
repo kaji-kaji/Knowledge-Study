@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>色弱判定プログラム</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #game-board {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .square {
+      width: 100px;
+      height: 100px;
+      margin: 3px;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .square:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>色弱判定を行います。他と違う色を一つ選択してください。<h1>
+  <div id="game-board">
+
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+
+  </div>
+
+  <script>
+    // 色の配列 先頭のfをeに変えるといい感じ
+    let colors = [
+      "#ff0000", // 赤
+      "#00ff00", // 緑
+      "#0000ff", // 青
+    ];
+
+    let diffcolors = [
+	  "#ef0000", // 赤
+        "#00ef00", // 緑
+        "#0000ef", // 青
+    ];
+    
+
+    // ゲームボードの正方形要素を取得
+    const squares = document.querySelectorAll('.square');
+
+    var kazu = Math.floor(Math.random() * colors.length);
+    var radom = Math.floor(Math.random() * squares.length);
+
+    for (let i = 0; i < squares.length; i++) {
+	if(i == radom){
+        squares[i].style.backgroundColor = diffcolors[kazu];
+      }else{
+        squares[i].style.backgroundColor = colors[kazu];
+      }
+    }
+
+
+    // クリックイベントを追加
+    squares.forEach((square, index) => {
+      square.addEventListener('click', () => {
+        if (index === radom) {
+          alert('正解！');
+        } else {
+          alert('残念、違います。');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
